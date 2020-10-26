@@ -32,7 +32,7 @@ jobs:
 
 
     - name: Check new parser
-      run: echo ${{ github.event.commits[0]["added"][0] }}
+      run: echo ${{ github.event.commits[0].added }}
       
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
