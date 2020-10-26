@@ -17,6 +17,9 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
 
+    - name: Check new parser
+      run: echo ${{ github.event.commits[0] }} && echo "Checked!" 
+
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2
@@ -31,8 +34,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
 
-    - name: Check new parser
-      run: echo ${{ github.event.commits[0] }} && echo "Checked!"
+
       
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
