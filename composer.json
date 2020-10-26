@@ -14,7 +14,7 @@
     "rowbot/punycode": "^1.0",
     "ext-dom": "*",
     "symfony/css-selector": "^5.1",
-    "fingli/parser-core": "dev-master"
+    "fingli/parser-core": "dev-main"
   },
   "config": {
     "process-timeout": 1800,
@@ -46,11 +46,6 @@
     {
       "type": "composer",
       "url": "https://asset-packagist.org"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:Kich-kichi/ParserCore.git",
-      "no-api": true
     }
   ],
   "require-dev": {
