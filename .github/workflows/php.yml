@@ -37,7 +37,8 @@ jobs:
       uses: jitterbit/get-changed-files@v1
     - run:  |
         for changed_file in ${{ steps.files.outputs.all }}; do
-          class = php -r '$s = "${{ github.event.commits[0].added[0] }}"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));'
+          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $test )
+          class=$( php -r "$classScript");
           echo "Do something with this ${class}."
         done
   
