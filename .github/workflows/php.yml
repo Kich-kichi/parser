@@ -33,15 +33,16 @@ jobs:
 
 
     - id: files
-      name: Validate new and changed parsers
       uses: jitterbit/get-changed-files@v1
-    - run:  |
+    
+    - name: Validate new and changed parsers 
+      if: ${{ contais(join(steps.files.outputs.all, ","), '.php') }}   
+      run:  |
         for changed_file in ${{ steps.files.outputs.all }}; do
           classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $test )
           class=$( php -r "$classScript");
           echo "Do something with this ${class}."
         done
-  
       
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
