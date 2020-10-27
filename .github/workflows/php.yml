@@ -31,7 +31,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Check new parser
-      if: ${{ github.event.commits[0].added[0] != null }}
+      if: ${{ github.event.commits[0].added[0] != 0 }}
       id: "newParserValidator"
       env:
         CLASS_NAME: php -r '$s = "${{ github.event.commits[0].added[0] }}"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));'
@@ -39,7 +39,7 @@ jobs:
 
 
     - name: Check modified parser
-      if: ${{ github.event.commits[0].modified[0] != null }}
+      if: ${{ github.event.commits[0].modified[0] != 0 }}
       id: "modifiedParserValidator"
       env:
         CLASS_NAME: php -r '$s = "${{ github.event.commits[0].modified[0] }}"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));'
