@@ -39,12 +39,14 @@ jobs:
       if: ${{ contains(join(steps.files.outputs.all, ','), '.php') }}   
       run:  |
         for changed_file in ${{ steps.files.outputs.all }}; do
-          echo "//////////"
-          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $changed_file )
+          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); if (strpos(end($exploded), ".php") !== false) {echo (str_replace(".php", "", end($exploded)));} else echo "Fail" ;' $changed_file )
           class=$( php -r "$classScript");
-          echo $class
-          php yii parser/news "$class"
-          echo "//////////"
+
+          if [ $class != "Fail" ]; then
+            echo "//////////"
+            php yii parser/news "$class"
+            echo "//////////"
+          fi
         done
       
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
