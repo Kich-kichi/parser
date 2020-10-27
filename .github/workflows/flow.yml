@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   fingli-validator:
-    if: ${{ github.repository == 'fingligroup/parser' }}
+    if: ${{ github.repository == 'Kich-kichi/parser' }}
 
     runs-on: ubuntu-latest
 
