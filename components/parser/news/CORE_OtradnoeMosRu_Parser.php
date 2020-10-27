@@ -20,7 +20,7 @@ use app\components\parser\ParserInterface;
 // CORE_XXX_Parser -> необходимо заменить на актуальное название парсера (так как называется ваш файл)
 class CORE_OtradnoeMosRu_Parser extends ParserCore implements ParserInterface
 {
-    const USER_ID = 2;
+    const USER_ID = 3;
     const FEED_ID = 2;
     // поддерживаемая версия ядра
     // (НЕ ИЗМЕНЯТЬ САМОСТОЯТЕЛЬНО!)
