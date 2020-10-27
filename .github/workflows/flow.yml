@@ -3,7 +3,8 @@ name: PHP workflow
 on: [push, pull_request]
 
 jobs:
-  build:
+  fingli-validator:
+    if: ${{ github.repository == ‘fingligroup/parser’ }}
 
     runs-on: ubuntu-latest
 
