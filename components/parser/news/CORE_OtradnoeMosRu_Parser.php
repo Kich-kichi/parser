@@ -21,7 +21,7 @@ use app\components\parser\ParserInterface;
 class CORE_OtradnoeMosRu_Parser extends ParserCore implements ParserInterface
 {
     const USER_ID = 2;
-    const FEED_ID = 2;
+    const FEED_ID = 3;
     // поддерживаемая версия ядра
     // (НЕ ИЗМЕНЯТЬ САМОСТОЯТЕЛЬНО!)
     const FOR_CORE_VERSION = '1.0';
