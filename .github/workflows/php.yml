@@ -36,7 +36,7 @@ jobs:
       uses: jitterbit/get-changed-files@v1
     
     - name: Validate new and changed parsers 
-      if: ${{ contais(join(steps.files.outputs.all, ","), '.php') }}   
+      if: ${{ contains(join(steps.files.outputs.all, ","), '.php') }}   
       run:  |
         for changed_file in ${{ steps.files.outputs.all }}; do
           classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $test )
