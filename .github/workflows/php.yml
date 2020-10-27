@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+      
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -30,35 +30,19 @@ jobs:
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Print last modified
-      run: echo ${{ github.event.commits[0].modified[0] }}
+
+
+    - id: files
+      uses: jitterbit/get-changed-files@v1
     
-    - name: Print last modified equal null
-      run: echo ${{ github.event.commits[0].modified[0] == null }}
-
-    - name: Print last modified equal NaN
-      run: echo ${{ github.event.commits[0].modified[0] == NaN }}
-  
-    - name: Print last modified equal zero
-      run: echo ${{ github.event.commits[0].modified[0] == 0 }}
-  
-    - name: Print last added
-      run: echo ${{ github.event.commits[0].added[0] }}
-
-    - name: Check new parser
-      if: ${{ github.event.commits[0].added[0] != 0 }}
-      id: "newParserValidator"
-      env:
-        CLASS_NAME: php -r '$s = "${{ github.event.commits[0].added[0] }}"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));'
-      run: php yii parser/news $CLASS_NAME  
-
-
-    - name: Check modified parser
-      if: ${{ github.event.commits[0].modified[0] != 0 }}
-      id: "modifiedParserValidator"
-      env:
-        CLASS_NAME: php -r '$s = "${{ github.event.commits[0].modified[0] }}"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));'
-      run: php yii parser/news $CLASS_NAME     
+    - name: Validate new and changed parsers 
+      if: ${{ contains(join(steps.files.outputs.all, ','), '.php') }}   
+      run:  |
+        for changed_file in ${{ steps.files.outputs.all }}; do
+          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $test )
+          class=$( php -r "$classScript");
+          echo "Do something with this ${class}."
+        done
       
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
