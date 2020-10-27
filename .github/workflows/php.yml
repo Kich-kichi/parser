@@ -40,7 +40,7 @@ jobs:
       run:  |
         for changed_file in ${{ steps.files.outputs.all }}; do
           echo "//////////"
-          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $test )
+          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $changed_file )
           class=$( php -r "$classScript");
           echo $class
           php yii parser/news "$class"
