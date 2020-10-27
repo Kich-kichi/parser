@@ -41,7 +41,7 @@ jobs:
         for changed_file in ${{ steps.files.outputs.all }}; do
           classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); echo (str_replace(".php", "", end($exploded)));' $test )
           class=$( php -r "$classScript");
-          echo "Do something with this ${class}."
+          php yii parser/news $class
         done
       
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
