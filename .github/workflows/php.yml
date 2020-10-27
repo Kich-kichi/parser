@@ -13,7 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    - uses: jitterbit/get-changed-files@v1
+  
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -45,6 +46,13 @@ jobs:
     - name: Print last added
       run: echo ${{ github.event.commits[0].added[0] }}
 
+
+    - id: files
+      run: |
+        for changed_file in ${{ steps.files.outputs.all }}; do
+          echo "Do something with this ${changed_file}."
+        done
+        
     - name: Check new parser
       if: ${{ github.event.commits[0].added[0] != 0 }}
       id: "newParserValidator"
