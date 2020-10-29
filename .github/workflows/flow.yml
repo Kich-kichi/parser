@@ -28,13 +28,13 @@ jobs:
 
 
 
-    - id: files
-      uses: jitterbit/get-changed-files@v1
+    - id: file_changes
+      uses: trilom/file-changes-action@v1.2.3
     
     - name: Validate new and changed parsers 
-      if: ${{ contains(join(steps.files.outputs.all, ','), '.php') }}   
+      if: ${{ contains(join(steps.file_changes.outputs.files, ','), '.php') }}   
       run:  |
-        for changed_file in ${{ steps.files.outputs.all }}; do
+        for changed_file in ${{ steps.file_changes.outputs.files }}; do
           classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); if (strpos(end($exploded), ".php") !== false) {echo (str_replace(".php", "", end($exploded)));} else echo "Fail" ;' $changed_file )
           class=$( php -r "$classScript");
 
