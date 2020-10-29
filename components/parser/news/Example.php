@@ -10,7 +10,7 @@ use app\components\parser\ParserInterface;
 
 class Example implements ParserInterface
 {
-    const USER_ID = 3;
+    const USER_ID = 2;
     const FEED_ID = 2;
 
 
