@@ -21,7 +21,7 @@ use fingli\parserCore\ParserCore;
 
 class CoreSecondTestParser extends ParserCore implements ParserInterface
 {
-    const USER_ID = 3;
+    const USER_ID = 2;
     const FEED_ID = 2;
     // поддерживаемая версия ядра
     const FOR_CORE_VERSION = '1.0.0';
