@@ -11,7 +11,7 @@ use app\components\parser\ParserInterface;
 class Example implements ParserInterface
 {
     const USER_ID = 2;
-    const FEED_ID = 3;
+    const FEED_ID = 2;
 
 
     public static function run(): array
