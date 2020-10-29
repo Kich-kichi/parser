@@ -35,7 +35,7 @@ jobs:
       if: ${{ contains(join(steps.file_changes.outputs.files, ','), '.php') }}   
       run:  |
         for changed_file in ${{ steps.file_changes.outputs.files }}; do
-          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); if (strpos(end($exploded), ".php") !== false) {echo preg_replace('/[^A-Za-z0-9. - _]/', '', (str_replace(".php", "", end($exploded))));} else echo "Fail" ;' $changed_file )
+          classScript=$( printf '$s = "%s"; $exploded = explode("/", $s); if (strpos(end($exploded), ".php") !== false) {echo preg_replace('/[^A-Za-z0-9. - _ ]/g', '', (str_replace(".php", "", end($exploded))));} else echo "Fail" ;' $changed_file )
           class=$( php -r "$classScript");
 
           if [ $class != "Fail" ]; then
